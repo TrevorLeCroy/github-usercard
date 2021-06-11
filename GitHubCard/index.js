@@ -1,8 +1,20 @@
+import axios from 'axios';
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+
+
+// !! Commeted out since I am doing the operation below !!
+// const request = axios.get('https://api.github.com/users/trevorlecroy')
+// .then(res => {
+//   cards.appendChild(createGitHubUserDOMElement(res.data));
+// })
+// .catch(err => {
+//   console.log(err);
+// });
+// !! !!
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -17,6 +29,7 @@
     and append the returned markup to the DOM as a child of .cards
 */
 
+
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
     follow this link in your browser https://api.github.com/users/<Your github name>/followers,
@@ -28,7 +41,20 @@
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+
+const cards = document.querySelector('.cards');
+const followersArray = ['tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell', 'trevorlecroy'];
+followersArray.forEach(user => {
+  axios.get('https://api.github.com/users/' + user)
+      .then(res => {
+        cards.appendChild(
+          createGitHubUserDOMElement(res.data)
+        );
+      })
+      .catch(err => {
+        console.log(err);
+      });
+})
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -49,6 +75,44 @@ const followersArray = [];
       </div>
     </div>
 */
+
+function createGitHubUserDOMElement(githubUser) {
+  const card      = document.createElement('div');
+  const img       = document.createElement('img');
+  const cardInfo  = document.createElement('div');
+  const name      = document.createElement('h3');
+  const userName  = document.createElement('p');
+  const location  = document.createElement('p');
+  const profile   = document.createElement('p');
+  const link      = document.createElement('a');
+  const followers = document.createElement('p');
+  const following = document.createElement('p');
+  const bio       = document.createElement('p');
+  
+  img.src              = githubUser.avatar_url;
+  name.textContent     = githubUser.name;
+  userName.textContent = githubUser.login;
+  location.textContent = githubUser.location;
+  profile.textContent  = 'Profile: ';
+  link.textContent     = githubUser.url;
+  followers.textContent = 'Followers: ' + githubUser.followers.toString();
+  following.textContent = 'Following: ' + githubUser.following.toString();
+  bio.textContent       = githubUser.bio;
+
+
+  card.appendChild(img);
+  card.appendChild(cardInfo);
+  cardInfo.appendChild(name);
+  cardInfo.appendChild(userName);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+  profile.appendChild(link);
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
+
+  return card;
+} 
 
 /*
   List of LS Instructors Github username's:
