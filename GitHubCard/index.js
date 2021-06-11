@@ -89,12 +89,12 @@ function createGitHubUserDOMElement(githubUser) {
   const following = document.createElement('p');
   const bio       = document.createElement('p');
   
-  img.src              = githubUser.avatar_url;
-  name.textContent     = githubUser.name;
-  userName.textContent = githubUser.login;
-  location.textContent = githubUser.location;
-  profile.textContent  = 'Profile: ';
-  link.textContent     = githubUser.url;
+  img.src               = githubUser.avatar_url;
+  name.textContent      = githubUser.name;
+  userName.textContent  = githubUser.login;
+  location.textContent  = githubUser.location;
+  profile.textContent   = 'Profile: ';
+  link.textContent      = githubUser.url;
   followers.textContent = 'Followers: ' + githubUser.followers.toString();
   following.textContent = 'Following: ' + githubUser.following.toString();
   bio.textContent       = githubUser.bio;
