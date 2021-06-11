@@ -76,7 +76,7 @@ followersArray.forEach(user => {
     </div>
 */
 
-function createGitHubUserDOMElement(githubUser) {
+const createGitHubUserDOMElement = (githubUser) => {
   const card      = document.createElement('div');
   const img       = document.createElement('img');
   const cardInfo  = document.createElement('div');
@@ -88,12 +88,17 @@ function createGitHubUserDOMElement(githubUser) {
   const followers = document.createElement('p');
   const following = document.createElement('p');
   const bio       = document.createElement('p');
+
+  card.classList.add('card');
+  cardInfo.classList.add('card-info');
+  name.classList.add('name');
   
   img.src               = githubUser.avatar_url;
   name.textContent      = githubUser.name;
   userName.textContent  = githubUser.login;
   location.textContent  = githubUser.location;
   profile.textContent   = 'Profile: ';
+  link.href             = githubUser.url;
   link.textContent      = githubUser.url;
   followers.textContent = 'Followers: ' + githubUser.followers.toString();
   following.textContent = 'Following: ' + githubUser.following.toString();
